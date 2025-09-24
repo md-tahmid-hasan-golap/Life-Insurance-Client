@@ -7,6 +7,7 @@ import AllPolicies from "../Components/AllPolicies/AllPolicies";
 import Blog from "../Components/Blog/Blog";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import PrivateRouter from "../Components/PrivateRouter/PrivateRouter";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
     ],
   },
   {
@@ -42,6 +47,12 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRouter>
     ),
+    children: [
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
+    ],
   },
 ]);
 
