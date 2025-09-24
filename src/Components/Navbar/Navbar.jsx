@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../../assets/Logo/insurance-agent_7985060.png";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../../firebase/FirebaseAuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handelLogout = () => {
+    logOut()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Logout Successful",
+          showConfirmButton: true, // OK button থাকবে
+          confirmButtonText: "OK",
+          timer: 2000, // 2 সেকেন্ড পরে alert auto-close হবে
+          timerProgressBar: true, // চাইলে progress bar দেখানো যাবে
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const link = (
     <>
       <li>
@@ -57,10 +79,21 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
-      <div className="navbar-end mr-4">
-        <Link to="/login" className="btn">
-          Login
-        </Link>
+      <div className="navbar-end mr-1">
+        {user ? (
+          <div>
+            <button onClick={handelLogout} className="btn text-red-600">
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
