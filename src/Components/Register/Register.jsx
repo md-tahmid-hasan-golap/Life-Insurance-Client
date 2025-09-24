@@ -5,9 +5,10 @@ import Swal from "sweetalert2";
 import registerLottie from "../../assets/Lottie/registerLottie.json.json";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../firebase/FirebaseAuthProvider";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
-  const { creatUser } = useContext(AuthContext);
+  const { creatUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -15,6 +16,31 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: true,
+          confirmButtonText: "OK",
+          timer: 2000,
+          timerProgressBar: true,
+        });
+        navigate("/"); // login successful হলে home এ redirect
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message,
+          showConfirmButton: true,
+          confirmButtonText: "OK",
+        });
+      });
+  };
   const onSubmit = (data) => {
     console.log(data);
     creatUser(data.email, data.password)
@@ -138,6 +164,9 @@ const Register = () => {
                 Register
               </button>
             </form>
+            <button onClick={handleGoogleSignIn} className="btn btn-outline">
+              Sign In With Google <FcGoogle size={25} />
+            </button>
           </div>
           <p className="text-center pb-3">
             Already Have An Account{" "}

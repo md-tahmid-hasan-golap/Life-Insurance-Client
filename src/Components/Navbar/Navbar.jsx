@@ -73,7 +73,7 @@ const Navbar = () => {
             alt="Life Insurance Logo"
             className="w-10 h-10 object-contain rounded-full"
           />
-          <span className="text-xl font-bold">Life Insurance</span>
+          <span className="text-sm md:text-xl font-bold">Life Insurance</span>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -81,13 +81,22 @@ const Navbar = () => {
       </div>
       <div className="navbar-end mr-1">
         {user ? (
-          <div>
+          <div className="navbar-end flex gap-2">
+            <img
+              className="w-10 h-10 rounded-full border-2 border-blue-600 cursor-pointer"
+              src={user?.photoURL}
+              title={user?.displayName}
+              alt=""
+            />
+            <h3 className="text-2xl font-medium hidden md:flex">
+              {user?.displayName}
+            </h3>
             <button onClick={handelLogout} className="btn text-red-600">
               Logout
             </button>
           </div>
         ) : (
-          <div>
+          <div className="navbar-end">
             {" "}
             <Link to="/login" className="btn">
               Login
