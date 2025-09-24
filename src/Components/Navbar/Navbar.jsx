@@ -37,6 +37,41 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/allPolicies"
+          className={({ isActive }) =>
+            isActive ? "bg-blue-600 text-white btn mr-2" : "btn mr-2"
+          }
+        >
+          All Policies
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/blog"
+          className={({ isActive }) =>
+            isActive ? "bg-blue-600 text-white btn mr-2" : "btn mr-2"
+          }
+        >
+          Blog
+        </NavLink>
+      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive ? "bg-blue-600 text-white btn mr-2" : "btn mr-2"
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (

@@ -3,6 +3,10 @@ import MainLayouts from "../Layouts/MainLayouts";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import AllPolicies from "../Components/AllPolicies/AllPolicies";
+import Blog from "../Components/Blog/Blog";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import PrivateRouter from "../Components/PrivateRouter/PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +18,14 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
+        path: "/allPolicies",
+        Component: AllPolicies,
+      },
+      {
+        path: "/blog",
+        Component: Blog,
+      },
+      {
         path: "/Login",
         Component: Login,
       },
@@ -22,6 +34,14 @@ const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRouter>
+        <Dashboard></Dashboard>
+      </PrivateRouter>
+    ),
   },
 ]);
 
