@@ -133,7 +133,7 @@ const Login = () => {
           </div>
 
           <p className="text-center pb-3">
-            Does't Have An Account{" "}
+            Don't Have An Account{" "}
             <Link className="text-blue-500 underline" to="/register">
               Register
             </Link>
